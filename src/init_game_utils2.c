@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:35:26 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/03 17:12:23 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:36:52 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**convert_map(char *filename)
 {
 	char	**map;
 	char	*buffer;
-	char	*readed;
+	char	*already_read;
 	int		fd;
 
 	fd = open(filename, O_RDONLY);
@@ -50,16 +50,16 @@ char	**convert_map(char *filename)
 	if (!buffer)
 		return (NULL);
 	buffer[1] = '\0';
-	readed = NULL;
+	already_read = NULL;
 	while (read(fd, buffer, 1) > 0)
 	{
-		readed = addtoreaded(readed, buffer[0]);
-		if (!readed)
+		already_read = addtoread(already_read, buffer[0]);
+		if (!already_read)
 			break ;
 	}
 	close(fd);
 	free(buffer);
-	map = ft_split(readed, '\n');
-	free(readed);
+	map = ft_split(already_read, '\n');
+	free(already_read);
 	return (map);
 }

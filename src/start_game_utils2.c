@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:26:34 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 17:28:40 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:18:22 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,82 @@ size_t	find_c_instance(t_game *game)
 	return (0);
 }
 
+char	*ft_stoa(size_t n)
+{
+	char	*number;
+	ssize_t	n_len;
+	size_t	n_test;
+
+	n_test = n;
+	n_len = 1;
+	while (n_test > 9)
+	{
+		n_test /= 10;
+		n_len++;
+	}
+	number = malloc((n_len + 1) * sizeof(char));
+	number[n_len--] = '\0';
+	while (n_len >= 0)
+	{
+		number[n_len--] = '0' + n % 10;
+		n /= 10;
+	}
+	return (number);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+void	print_nb_move(t_game *game)
+{
+	char	*nb_move_str;
+	size_t	nb;
+	size_t	nb_len;
+
+	game->nb_move++;
+	if (game->img_nb_move)
+		game->img_nb_move->enabled = false;
+	nb = game->nb_move;
+	nb_len = 1;
+	while (nb > 9)
+	{
+		nb /= 10;
+		nb_len++;
+	}
+	nb_move_str = ft_strjoin("Number of movements : ", ft_stoa(game->nb_move));
+	game->img_nb_move = mlx_put_string(game->mlx, nb_move_str, 0, 0);
+	free(nb_move_str);
+}
+
 void	up(t_game *game)
 {
 	size_t	c_instance;
 
-	if (game->map[game->p.y - 1][game->p.x] == '1'
-		|| (game->map[game->p.y - 1][game->p.x] == 'E'
-		&& game->nb_c_found < game->nb_c))
+	if (game->map[game->p.y - 1][game->p.x] == '1')
 		return ;
 	game->p.y--;
 	game->img_player->instances[0].y -= 32;
-	game->nb_move++;
-	ft_printf("number of movements = %u\n", game->nb_move);
+	print_nb_move(game);
 	if (game->map[game->p.y][game->p.x] == 'C')
 	{
 		c_instance = find_c_instance(game);
@@ -62,102 +126,4 @@ void	up(t_game *game)
 	if (game->map[game->p.y][game->p.x] == 'E'
 		&& game->nb_c_found == game->nb_c)
 		mlx_close_window(game->mlx);
-}
-
-void	down(t_game *game)
-{
-	size_t	c_instance;
-
-	if (game->map[game->p.y + 1][game->p.x] == '1')
-		return ;
-	if (game->map[game->p.y + 1][game->p.x] == 'E'
-		&& game->nb_c_found < game->nb_c)
-		return ;
-	game->p.y++;
-	game->img_player->instances[0].y += 32;
-	game->nb_move++;
-	ft_printf("number of movements = %u\n", game->nb_move);
-	if (game->map[game->p.y][game->p.x] == 'C')
-	{
-		c_instance = find_c_instance(game);
-		if (game->img_collect->instances[c_instance].enabled == true)
-		{
-			game->img_collect->instances[c_instance].enabled = false;
-			game->nb_c_found++;
-		}
-	}
-	if (game->map[game->p.y][game->p.x] == 'E'
-		&& game->nb_c_found == game->nb_c)
-		mlx_close_window(game->mlx);
-}
-
-void	left(t_game *game)
-{
-	size_t	c_instance;
-
-	if (game->map[game->p.y][game->p.x - 1] == '1')
-		return ;
-	if (game->map[game->p.y][game->p.x - 1] == 'E'
-		&& game->nb_c_found < game->nb_c)
-		return ;
-	game->p.x--;
-	game->img_player->instances[0].x -= 32;
-	game->nb_move++;
-	ft_printf("number of movements = %u\n", game->nb_move);
-	if (game->map[game->p.y][game->p.x] == 'C')
-	{
-		c_instance = find_c_instance(game);
-		if (game->img_collect->instances[c_instance].enabled == true)
-		{
-			game->img_collect->instances[c_instance].enabled = false;
-			game->nb_c_found++;
-		}
-	}
-	if (game->map[game->p.y][game->p.x] == 'E'
-		&& game->nb_c_found == game->nb_c)
-		mlx_close_window(game->mlx);
-}
-
-void	right(t_game *game)
-{
-	size_t	c_instance;
-
-	if (game->map[game->p.y][game->p.x + 1] == '1')
-		return ;
-	if (game->map[game->p.y][game->p.x + 1] == 'E'
-		&& game->nb_c_found < game->nb_c)
-		return ;
-	game->p.x++;
-	game->img_player->instances[0].x += 32;
-	game->nb_move++;
-	ft_printf("number of movements = %u\n", game->nb_move);
-	if (game->map[game->p.y][game->p.x] == 'C')
-	{
-		c_instance = find_c_instance(game);
-		if (game->img_collect->instances[c_instance].enabled == true)
-		{
-			game->img_collect->instances[c_instance].enabled = false;
-			game->nb_c_found++;
-		}
-	}
-	if (game->map[game->p.y][game->p.x] == 'E'
-		&& game->nb_c_found == game->nb_c)
-		mlx_close_window(game->mlx);
-}
-
-void	key_control(mlx_key_data_t keydata, void *param)
-{
-	t_game	*game;
-
-	game = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(game->mlx);
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		up(game);
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		down(game);
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		left(game);
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		right(game);
 }

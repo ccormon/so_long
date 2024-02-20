@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:17:28 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/03 17:05:55 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:35:03 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*addtoreaded(char *s, int c)
+char	*addtoread(char *s, int c)
 {
 	char	*new_s;
 	size_t	i;

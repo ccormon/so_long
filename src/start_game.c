@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:58:42 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 17:14:41 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:32:00 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	start_game(t_game *game)
 		return ;
 	display_map(game);
 	game->nb_move = 0;
+	game->img_nb_move = NULL;
 	game->nb_c_found = 0;
 	mlx_key_hook(game->mlx, key_control, game);
 	mlx_loop(game->mlx);

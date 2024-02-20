@@ -25,6 +25,7 @@ SRC 		=	src/main.c\
 				src/start_game.c\
 				src/start_game_utils1.c\
 				src/start_game_utils2.c\
+				src/start_game_utils3.c\
 
 OBJ 		= $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:05:41 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/05 12:31:06 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:18:43 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_game
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_wall;
 	size_t			nb_move;
+	mlx_image_t		*img_nb_move;
 	size_t			nb_c_found;
 }	t_game;
 
@@ -84,7 +85,7 @@ void	ft_putstr(char *str);
 int		init_game(t_game *game, char *filename);
 char	*ft_strcpy(char *s);
 size_t	ft_strlen(char *s);
-char	*addtoreaded(char *s, int c);
+char	*addtoread(char *s, int c);
 int		ft_countword(char const *s, char c);
 char	*ft_allocword(char const *s, char c, int const i);
 char	**ft_split(char const *s, char c);
@@ -115,7 +116,14 @@ void	display_map_background(t_game *game);
 void	display_map_objects(t_game *game);
 void	display_map_player(t_game *game);
 void	display_map(t_game *game);
+size_t	find_c_instance(t_game *game);
+char	*ft_stoa(size_t n);
+char	*ft_strjoin(char *s1, char *s2);
+void	print_nb_move(t_game *game);
 void	up(t_game *game);
+void	down(t_game *game);
+void	left(t_game *game);
+void	right(t_game *game);
 void	key_control(mlx_key_data_t keydata, void *param);
 // close_game
 void	free_map(char **map);
