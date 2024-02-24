@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:19:54 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 17:38:15 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:48:03 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ void	k_right(t_game *game)
 void	patrol_move(void *param)
 {
 	t_game	*game;
-	int		move;
 
 	game = param;
-	srand(1);
-	move = rand() % 4;
-	if (move == 0)
-		k_up(game);
-	if (move == 1)
-		k_down(game);
-	if (move == 2)
-		k_left(game);
-	if (move == 3)
-		k_right(game);
+	game->timer += game->mlx->delta_time;
+	game->move_code = rand() % 4;
+	if (game->timer > 1)
+	{
+		if (game->move_code == 0)
+			k_up(game);
+		if (game->move_code == 1)
+			k_down(game);
+		if (game->move_code == 2)
+			k_left(game);
+		if (game->move_code == 3)
+			k_right(game);
+		game->move_code = rand() % 4;
+		game->timer = 0;
+	}
 }

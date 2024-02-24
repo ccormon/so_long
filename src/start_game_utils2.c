@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:26:34 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 16:19:19 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:02:30 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	*ft_strjoin(char *s1, char *s2)
 void	print_nb_move(t_game *game)
 {
 	char	*nb_move_str;
+	char	*number;
 	size_t	nb;
 	size_t	nb_len;
 
@@ -100,7 +101,9 @@ void	print_nb_move(t_game *game)
 		nb /= 10;
 		nb_len++;
 	}
-	nb_move_str = ft_strjoin("Number of movements : ", ft_stoa(game->nb_move));
+	number = ft_stoa(game->nb_move);
+	nb_move_str = ft_strjoin("Number of movements : ", number);
+	free(number);
 	game->img_nb_move = mlx_put_string(game->mlx, nb_move_str, 0, 0);
 	free(nb_move_str);
 }

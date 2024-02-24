@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:05:41 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 17:36:29 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:44:06 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_game
 	t_point			k;
 	mlx_texture_t	*tex_killer;
 	mlx_image_t		*img_killer;
+	double			timer;
+	int				move_code;
 }	t_game;
 
 // ft_printf

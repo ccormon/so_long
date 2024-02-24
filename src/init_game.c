@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:12:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 16:05:14 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:36:48 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	init_game(t_game *game, char *filename)
 		free_map(game->map);
 		return (0);
 	}
+	game->timer = 0;
 	return (1);
 }
