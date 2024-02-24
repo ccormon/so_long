@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:04:51 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 16:01:09 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/17 19:09:15 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (!init_game(&game, argv[1]))
-			return (1);
+			return (EXIT_FAILURE);
 		ft_printf("map OK ;)\n");
 		start_game(&game);
 		close_game(&game);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

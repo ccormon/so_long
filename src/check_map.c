@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:38:04 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 16:08:23 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 17:36:49 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,19 @@ I hope you're not claustrophobic...\n");
 	if (code == 9)
 		ft_printf("Error\nDude ! You must have at least one valid \
 path ! You're not really sharp-minded hm ?\n");
+	if (code == 10)
+		ft_printf("Error\nDude ! You must have one or less killer on your \
+map !\nDon't you think one killer is enough ? C'mon ! Don't be cliche...\n");
 }
 
-int	map_error(int code)
+bool	map_error(int code)
 {
 	map_error_print1(code);
 	map_error_print2(code);
-	return (0);
+	return (false);
 }
 
-int	check_map(t_game *game)
+bool	check_map(t_game *game)
 {
 	if (!check_map_extension(game->filename)
 		|| !check_map_characters(game)
@@ -64,7 +67,7 @@ int	check_map(t_game *game)
 	{
 		ft_printf("I hope you fixe this soon because I can come here to take \
 care of you !\n");
-		return (0);
+		return (false);
 	}
-	return (1);
+	return (true);
 }

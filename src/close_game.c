@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:22:11 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/20 11:51:54 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:09:25 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	free_texture(t_game *game)
 	mlx_delete_texture(game->tex_floor);
 	mlx_delete_texture(game->tex_player);
 	mlx_delete_texture(game->tex_wall);
+	if (game->k_exist)
+		mlx_delete_texture(game->tex_killer);
 }
 
 // void	close_window(t_game *game)

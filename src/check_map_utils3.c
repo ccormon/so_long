@@ -6,13 +6,45 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 10:26:23 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 14:56:32 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:05:08 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_map_wall_vertical(char **map, size_t nb_row, size_t nb_col)
+bool	check_map_rectangle(t_game *game)
+{
+	size_t	y;
+
+	game->nb_row = count_row(game->map);
+	game->nb_col = ft_strlen(game->map[0]);
+	if (game->nb_row < 3 || game->nb_col < 3)
+		return (map_error(6));
+	y = 1;
+	while (game->map[y])
+	{
+		if (ft_strlen(game->map[y]) != game->nb_col)
+			return (map_error(7));
+		y++;
+	}
+	return (true);
+}
+
+bool	check_map_wall_horizontal(char **map, size_t nb_row)
+{
+	size_t	x;
+
+	x = 0;
+	while (map[0][x] && map[nb_row - 1][x])
+	{
+		if (map[0][x] != '1' || map[nb_row - 1][x] != '1')
+			return (false);
+		x++;
+	}
+	return (true);
+}
+
+bool	check_map_wall_vertical(char **map, size_t nb_row, size_t nb_col)
 {
 	size_t	y;
 
@@ -20,18 +52,18 @@ int	check_map_wall_vertical(char **map, size_t nb_row, size_t nb_col)
 	while (y < nb_row)
 	{
 		if (map[y][0] != '1' || map[y][nb_col - 1] != '1')
-			return (0);
+			return (false);
 		y++;
 	}
-	return (1);
+	return (true);
 }
 
-int	check_map_wall(char **map, size_t nb_row, size_t nb_col)
+bool	check_map_wall(char **map, size_t nb_row, size_t nb_col)
 {
-	if (check_map_wall_horizontal(map, nb_row) == 0
-		|| check_map_wall_vertical(map, nb_row, nb_col) == 0)
+	if (!check_map_wall_horizontal(map, nb_row)
+		|| !check_map_wall_vertical(map, nb_row, nb_col))
 		return (map_error(8));
-	return (1);
+	return (true);
 }
 
 char	**map_cpy(char **map, size_t nb_row, size_t nb_col)
@@ -41,14 +73,10 @@ char	**map_cpy(char **map, size_t nb_row, size_t nb_col)
 	size_t	y;
 
 	copy = malloc((nb_row + 1) * sizeof(char *));
-	if (!copy)
-		return (0);
 	y = 0;
 	while (map[y])
 	{
 		copy[y] = malloc((nb_col + 1) * sizeof(char));
-		if (!copy[y])
-			return (NULL);
 		x = 0;
 		while (map[y][x])
 		{
@@ -60,55 +88,4 @@ char	**map_cpy(char **map, size_t nb_row, size_t nb_col)
 	}
 	copy[y] = NULL;
 	return (copy);
-}
-
-void	check_map_path_tester(t_game *game, ssize_t p_x, ssize_t p_y)
-{
-	if (p_x == game->goal.x && p_y == game->goal.y)
-	{
-		game->check_path_res = 1;
-		return ;
-	}
-	game->map_cpy[p_y][p_x] = 'V';
-	if (game->map_cpy[p_y - 1][p_x] && game->map_cpy[p_y - 1][p_x] != '1'
-		&& game->map_cpy[p_y - 1][p_x] != 'V')
-		check_map_path_tester(game, p_x, p_y - 1);
-	if (game->map_cpy[p_y + 1][p_x] && game->map_cpy[p_y + 1][p_x] != '1'
-		&& game->map_cpy[p_y + 1][p_x] != 'V')
-		check_map_path_tester(game, p_x, p_y + 1);
-	if (game->map_cpy[p_y][p_x - 1] && game->map_cpy[p_y][p_x - 1] != '1'
-		&& game->map_cpy[p_y][p_x - 1] != 'V')
-		check_map_path_tester(game, p_x - 1, p_y);
-	if (game->map_cpy[p_y][p_x + 1] && game->map_cpy[p_y][p_x + 1] != '1'
-		&& game->map_cpy[p_y][p_x + 1] != 'V')
-		check_map_path_tester(game, p_x + 1, p_y);
-}
-
-int	check_map_path(t_game *game)
-{
-	size_t	x;
-	size_t	y;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'C' || game->map[y][x] == 'E')
-			{
-				game->goal.x = x;
-				game->goal.y = y;
-				game->map_cpy = map_cpy(game->map, game->nb_row, game->nb_col);
-				game->check_path_res = 0;
-				check_map_path_tester(game, game->p.x, game->p.y);
-				free_map(game->map_cpy);
-				if (!game->check_path_res)
-					return (map_error(9));
-			}
-			x++;
-		}
-		y++;
-	}
-	return (1);
 }

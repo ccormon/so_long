@@ -21,11 +21,13 @@ SRC 		=	src/main.c\
 				src/check_map_utils1.c\
 				src/check_map_utils2.c\
 				src/check_map_utils3.c\
+				src/check_map_utils4.c\
 				src/close_game.c\
 				src/start_game.c\
 				src/start_game_utils1.c\
 				src/start_game_utils2.c\
 				src/start_game_utils3.c\
+				src/start_game_utils4.c\
 
 OBJ 		= $(SRC:.c=.o)
 

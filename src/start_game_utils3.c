@@ -6,13 +6,13 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:36:31 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/20 15:18:19 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:19:16 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	down(t_game *game)
+void	p_down(t_game *game)
 {
 	size_t	c_instance;
 
@@ -31,12 +31,14 @@ void	down(t_game *game)
 			game->nb_c_found++;
 		}
 	}
+	if (game->p.x == game->k.x && game->p.y == game->k.y)
+		mlx_close_window(game->mlx);
 	if (game->map[game->p.y][game->p.x] == 'E'
 		&& game->nb_c_found == game->nb_c)
 		mlx_close_window(game->mlx);
 }
 
-void	left(t_game *game)
+void	p_left(t_game *game)
 {
 	size_t	c_instance;
 
@@ -55,12 +57,14 @@ void	left(t_game *game)
 			game->nb_c_found++;
 		}
 	}
+	if (game->p.x == game->k.x && game->p.y == game->k.y)
+		mlx_close_window(game->mlx);
 	if (game->map[game->p.y][game->p.x] == 'E'
 		&& game->nb_c_found == game->nb_c)
 		mlx_close_window(game->mlx);
 }
 
-void	right(t_game *game)
+void	p_right(t_game *game)
 {
 	size_t	c_instance;
 
@@ -79,6 +83,8 @@ void	right(t_game *game)
 			game->nb_c_found++;
 		}
 	}
+	if (game->p.x == game->k.x && game->p.y == game->k.y)
+		mlx_close_window(game->mlx);
 	if (game->map[game->p.y][game->p.x] == 'E'
 		&& game->nb_c_found == game->nb_c)
 		mlx_close_window(game->mlx);
@@ -92,11 +98,11 @@ void	key_control(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		up(game);
+		p_up(game);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		down(game);
+		p_down(game);
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		left(game);
+		p_left(game);
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		right(game);
+		p_right(game);
 }

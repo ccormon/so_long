@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:26:34 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/20 15:18:22 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:19:19 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	print_nb_move(t_game *game)
 	free(nb_move_str);
 }
 
-void	up(t_game *game)
+void	p_up(t_game *game)
 {
 	size_t	c_instance;
 
@@ -123,6 +123,8 @@ void	up(t_game *game)
 			game->nb_c_found++;
 		}
 	}
+	if (game->p.x == game->k.x && game->p.y == game->k.y)
+		mlx_close_window(game->mlx);
 	if (game->map[game->p.y][game->p.x] == 'E'
 		&& game->nb_c_found == game->nb_c)
 		mlx_close_window(game->mlx);

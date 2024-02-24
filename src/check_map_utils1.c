@@ -6,13 +6,13 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:42:01 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 16:03:28 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 17:40:23 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_map_extension(char *filename)
+bool	check_map_extension(char *filename)
 {
 	size_t	i;
 
@@ -23,11 +23,11 @@ int	check_map_extension(char *filename)
 		&& filename[i - 3] == 'b'
 		&& filename[i - 2] == 'e'
 		&& filename[i - 1] == 'r')
-		return (1);
+		return (true);
 	return (map_error(1));
 }
 
-int	check_map_characters_p(char **map)
+bool	check_map_characters_p(char **map)
 {
 	size_t	nb_p;
 	size_t	x;
@@ -50,10 +50,10 @@ int	check_map_characters_p(char **map)
 	}
 	if (nb_p != 1)
 		return (map_error(2));
-	return (1);
+	return (true);
 }
 
-int	check_map_characters_e(char **map)
+bool	check_map_characters_e(char **map)
 {
 	size_t	nb_e;
 	size_t	x;
@@ -76,10 +76,10 @@ int	check_map_characters_e(char **map)
 	}
 	if (nb_e != 1)
 		return (map_error(3));
-	return (1);
+	return (true);
 }
 
-int	check_map_characters_other(char **map)
+bool	check_map_characters_other(char **map)
 {
 	size_t	x;
 	size_t	y;
@@ -91,13 +91,13 @@ int	check_map_characters_other(char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'C'
-				&& map[y][x] != 'P' && map[y][x] != 'E' )
+				&& map[y][x] != 'P' && map[y][x] != 'E' && map[y][x] != 'K')
 				return (map_error(4));
 			x++;
 		}
 		y++;
 	}
-	return (1);
+	return (true);
 }
 
 size_t	count_c(char **map)

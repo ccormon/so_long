@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:25:35 by ccormon           #+#    #+#             */
-/*   Updated: 2024/01/04 16:26:49 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:10:54 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,20 @@ void	init_texture(t_game *game)
 	game->tex_player= mlx_load_png(PLAYER_PATH);
 	game->tex_wall = mlx_load_png(WALL_PATH);
 	if (!game->tex_collect || !game->tex_exit || !game->tex_floor
-		|| !game->tex_player || !game->tex_wall)
+		|| !game->tex_killer || !game->tex_player || !game->tex_wall)
 		return ;
 	game->img_collect = mlx_texture_to_image(game->mlx, game->tex_collect);
 	game->img_exit = mlx_texture_to_image(game->mlx, game->tex_exit);
 	game->img_floor = mlx_texture_to_image(game->mlx, game->tex_floor);
 	game->img_player = mlx_texture_to_image(game->mlx, game->tex_player);
 	game->img_wall = mlx_texture_to_image(game->mlx, game->tex_wall);
+	if (game->k_exist)
+	{
+		game->tex_killer = mlx_load_png(KILLER_PATH);
+		if (!game->tex_killer)
+			return ;
+		game->img_killer = mlx_texture_to_image(game->mlx, game->tex_killer);
+	}
 }
 
 void	display_map_background(t_game *game)
@@ -73,7 +80,7 @@ void	display_map_objects(t_game *game)
 	}
 }
 
-void	display_map_player(t_game *game)
+void	display_map_player_and_killer(t_game *game)
 {
 	size_t	x;
 	size_t	y;
@@ -87,6 +94,9 @@ void	display_map_player(t_game *game)
 			if (game->map[y][x] == 'P')
 				mlx_image_to_window(game->mlx, game->img_player, x * 32,
 					y * 32);
+			if (game->k_exist && game->map[y][x] == 'K')
+				mlx_image_to_window(game->mlx, game->img_killer, x * 32,
+					y * 32);
 			x++;
 		}
 		y++;
@@ -97,5 +107,5 @@ void	display_map(t_game *game)
 {
 	display_map_background(game);
 	display_map_objects(game);
-	display_map_player(game);
+	display_map_player_and_killer(game);
 }
