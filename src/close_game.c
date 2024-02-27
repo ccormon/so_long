@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:22:11 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 18:56:22 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 11:56:36 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	free_texture(t_game *game)
 
 void	close_game(t_game *game)
 {
-	free(game->filename);
 	free_map(game->map);
 	free_texture(game);
 }

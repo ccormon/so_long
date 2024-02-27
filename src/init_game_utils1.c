@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:17:28 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/20 13:35:03 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 11:55:08 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ char	*ft_strcpy(char *s)
 	char	*cpy;
 	size_t	i;
 
-	i = 0;
-	while (s[i])
-		i++;
+	i = ft_strlen(s);
 	if (i == 0)
 		return (NULL);
 	cpy = malloc((i + 1) * sizeof(char));
-	if (!cpy)
-		return (NULL);
 	i = 0;
 	while (s[i])
 	{
