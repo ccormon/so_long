@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:22:11 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 11:56:36 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:06:31 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	free_map(char **map)
 {
 	size_t	y;
 
+	if (!map || !(*map))
+	{
+		free(map);
+		return ;
+	}
 	y = 0;
 	while (map[y])
 		free(map[y++]);
@@ -33,12 +38,6 @@ void	free_texture(t_game *game)
 	if (game->k_exist)
 		mlx_delete_texture(game->tex_killer);
 }
-
-// void	close_window(t_game *game)
-// {
-// 	mlx_close_window(game->mlx);
-// 	mlx_terminate(game->mlx);
-// }
 
 void	close_game(t_game *game)
 {

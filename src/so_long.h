@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:05:41 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 10:38:32 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:18:26 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	ft_putnbr(unsigned int n);
 void	ft_putstr(char *str);
 
 // init_game
-int		init_game(t_game *game, char *filename);
+bool	init_game(t_game *game, char *filename);
+void	print_error(void);
 //  utils1
 char	*ft_strcpy(char *s);
 size_t	ft_strlen(char *s);

@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:35:26 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/20 13:36:52 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:14:03 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**ft_split(char const *s, char c)
 	int		word;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	nbword = ft_countword(s, c);
 	tab = (char **)malloc((nbword + 1) * sizeof(char *));
 	if (tab == NULL)
@@ -45,11 +47,14 @@ char	**convert_map(char *filename)
 	char	*already_read;
 	int		fd;
 
-	fd = open(filename, O_RDONLY);
 	buffer = malloc(2 * sizeof(char));
-	if (!buffer)
-		return (NULL);
 	buffer[1] = '\0';
+	fd = open(filename, O_RDONLY);
+	if (fd == -1 || read(fd, buffer, 0) == -1)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	already_read = NULL;
 	while (read(fd, buffer, 1) > 0)
 	{
