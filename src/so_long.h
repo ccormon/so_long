@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:05:41 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 18:44:06 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:38:32 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_game
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_wall;
 	size_t			nb_move;
-	mlx_image_t		*img_nb_move;
 	size_t			nb_c_found;
+	mlx_image_t		*img_nb_move;
 	bool			k_exist;
 	t_point			k;
 	mlx_texture_t	*tex_killer;

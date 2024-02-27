@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:26:34 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 19:02:30 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:43:50 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	print_nb_move(t_game *game)
 	size_t	nb;
 	size_t	nb_len;
 
-	game->nb_move++;
 	if (game->img_nb_move)
 		game->img_nb_move->enabled = false;
 	nb = game->nb_move;
@@ -116,6 +115,7 @@ void	p_up(t_game *game)
 		return ;
 	game->p.y--;
 	game->img_player->instances[0].y -= 32;
+	game->nb_move++;
 	print_nb_move(game);
 	if (game->map[game->p.y][game->p.x] == 'C')
 	{

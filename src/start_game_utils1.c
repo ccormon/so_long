@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:25:35 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/24 18:51:20 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:45:51 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_texture(t_game *game)
 	game->tex_collect = mlx_load_png(COLLECT_PATH);
 	game->tex_exit = mlx_load_png(EXIT_PATH);
 	game->tex_floor = mlx_load_png(FLOOR_PATH);
-	game->tex_player= mlx_load_png(PLAYER_PATH);
+	game->tex_player = mlx_load_png(PLAYER_PATH);
 	game->tex_wall = mlx_load_png(WALL_PATH);
 	if (!game->tex_collect || !game->tex_exit || !game->tex_floor
 		|| !game->tex_player || !game->tex_wall)
