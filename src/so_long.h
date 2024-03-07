@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:05:41 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 14:18:26 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:10:11 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,9 @@ size_t	find_c_instance(t_game *game);
 char	*ft_stoa(size_t n);
 char	*ft_strjoin(char *s1, char *s2);
 void	print_nb_move(t_game *game);
-void	p_up(t_game *game);
+void	win_or_game_over(t_game *game, int code);
 //  utils3
+void	p_up(t_game *game);
 void	p_down(t_game *game);
 void	p_left(t_game *game);
 void	p_right(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:26:34 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 10:43:50 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:11:47 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,28 +107,12 @@ void	print_nb_move(t_game *game)
 	free(nb_move_str);
 }
 
-void	p_up(t_game *game)
+void	win_or_game_over(t_game *game, int code)
 {
-	size_t	c_instance;
-
-	if (game->map[game->p.y - 1][game->p.x] == '1')
-		return ;
-	game->p.y--;
-	game->img_player->instances[0].y -= 32;
-	game->nb_move++;
-	print_nb_move(game);
-	if (game->map[game->p.y][game->p.x] == 'C')
-	{
-		c_instance = find_c_instance(game);
-		if (game->img_collect->instances[c_instance].enabled == true)
-		{
-			game->img_collect->instances[c_instance].enabled = false;
-			game->nb_c_found++;
-		}
-	}
-	if (game->p.x == game->k.x && game->p.y == game->k.y)
-		mlx_close_window(game->mlx);
-	if (game->map[game->p.y][game->p.x] == 'E'
-		&& game->nb_c_found == game->nb_c)
-		mlx_close_window(game->mlx);
+	if (code == 'l')
+		ft_printf("GAME_OVER !\nYou looooose ! You're a looooseeer ! \
+Boooooo the baby loooser !\n");
+	if (code == 'w')
+		ft_printf("You win... Well... Congrats.\n");
+	mlx_close_window(game->mlx);
 }

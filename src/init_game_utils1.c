@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:17:28 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 11:55:08 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:26:16 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_countword(char const *s, char c)
 	int	nbword;
 	int	i;
 
-	if (s[0] == '\0')
+	if (!s || s[0] == '\0')
 		return (0);
 	nbword = 0;
 	i = 0;
@@ -88,7 +88,7 @@ int	ft_countword(char const *s, char c)
 	}
 	while (s[i] != '\0')
 	{
-		if (s[i - 1] == c && s[i] != c)
+		if ((i == 0 && s[i] == c) || (i > 0 && s[i - 1] == c && s[i] != c))
 			nbword++;
 		i++;
 	}

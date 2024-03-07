@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:35:26 by ccormon           #+#    #+#             */
-/*   Updated: 2024/02/27 15:14:03 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:21:10 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_split(char const *s, char c)
 	int		word;
 	int		i;
 
-	if (!s)
+	if (!s || !(*s))
 		return (NULL);
 	nbword = ft_countword(s, c);
 	tab = (char **)malloc((nbword + 1) * sizeof(char *));
